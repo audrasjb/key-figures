@@ -1,7 +1,7 @@
 /**
  * Admin CSS rules
  */
-.key_figure:before {
+#mce-wp-kf i:before {
 	content: "\f313";
 	display: inline-block;
 	-webkit-font-smoothing: antialiased;

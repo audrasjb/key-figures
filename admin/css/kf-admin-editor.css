@@ -1,0 +1,23 @@
+/**
+ * Editor CSS rules
+ */
+body .keyfigure_bloc {
+	display: table;
+	border: 1px dashed #dedede;
+	padding: 0 1em;
+}
+
+body .keyfigure_bloc_figure {
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 60px;
+	color: #000;
+}
+
+body .keyfigure_bloc_text {
+	display: table-cell;
+	vertical-align: middle;
+	padding-left: 1em;
+	font-size: 18px;
+	color: #000;
+}
