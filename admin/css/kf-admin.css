@@ -1,0 +1,10 @@
+/**
+ * Admin CSS rules
+ */
+.key_figure:before {
+	content: "\f313";
+	display: inline-block;
+	-webkit-font-smoothing: antialiased;
+	font: normal 16px/1 'dashicons';
+	vertical-align: top;
+}
