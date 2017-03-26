@@ -18,7 +18,7 @@
 						label: 'Text'
 					}],
 					onsubmit: function( e ) {
-						editor.insertContent( '<span class="keyfigure_bloc"><span class="keyfigure_bloc_figure">' + e.data.figure + '</span><span class="keyfigure_bloc_text">' + e.data.text + '</span></span>' );
+						editor.insertContent( '<span data-figure="' + e.data.figure + '" class="keyfigure_bloc"><span class="keyfigure_bloc_figure">' + e.data.figure + '</span><span class="keyfigure_bloc_text">' + e.data.text + '</span></span>' );
 					}
 				});				
 			}

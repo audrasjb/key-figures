@@ -134,10 +134,10 @@ function kf_field_figure_default_animation_render(  ) {
 	if (isset($options['kf_field_figure_default_animation'])) {
 		$optionFigureAnimationDefault = $options['kf_field_figure_default_animation'];
 	} else {
-		$optionFigureAnimationDefault = '';		
+		$optionFigureAnimationDefault = 'none';		
 	}
 	?>
-	<select name='rp_settings[kf_field_figure_default_animation]'>
+	<select name='kf_settings[kf_field_figure_default_animation]'>
 		<option value="none" <?php selected( $optionFigureAnimationDefault, 'none' ); ?>><?php echo __('No animation', 'key-figures'); ?></option>
 		<option value="counter" <?php selected( $optionFigureAnimationDefault, 'counter' ); ?>><?php echo __('Counter', 'key-figures'); ?></option>
 		<option value="fadein" <?php selected( $optionFigureAnimationDefault, 'fadein' ); ?>><?php echo __('Fade in', 'key-figures'); ?></option>
@@ -257,15 +257,19 @@ class TinyMCE_KF {
 	}
 	// Adding i18n tinymce strings
 	function translate_tinymce_kf() {
+		if (isset($options['kf_field_figure_default_animation'])) {
+			$optionFigureAnimationDefault = $options['kf_field_figure_default_animation'];
+		} else {
+			$optionFigureAnimationDefault = 'none';		
+		}
 		$translations = json_encode(
 			array( 
-				'kf_add_button' 		=> __('Key figure', 'key-figures'),
+				'kf_add_button' 	=> __('Key figure', 'key-figures'),
 				'kf_delete_button' 	=> __('Delete figure', 'key-figures'),
-				'kf_figure_label' 		=> __('Figure', 'key-figures'),
-				'kf_figure_help' 		=> __('Enter number', 'key-figures'),
-				'kf_text_label' 		=> __('Text', 'key-figures'),
+				'kf_figure_label' 	=> __('Figure', 'key-figures'),
+				'kf_figure_help' 	=> __('Enter number', 'key-figures'),
+				'kf_text_label' 	=> __('Text', 'key-figures'),
 				'kf_text_help' 		=> __('Enter text', 'key-figures'),
-				'kf_alert' 			=> __('Please select some text first', 'key-figures')
 			)
 		);
 		echo '<script>var kfTranslations = ' . $translations . ';</script>';
