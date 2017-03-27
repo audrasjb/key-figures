@@ -48,6 +48,17 @@
 			else : 
 				$optionFigureAnimation = "none";				
 			endif;
+
+			if (isset($kfSettings['kf_field_figure_default_animation_duration'])) :
+				$optionFigureAnimationDurationDefault = $kfSettings['kf_field_figure_default_animation_duration'];
+				if ($optionFigureAnimationDurationDefault) : 
+					$optionFigureAnimationDuration = $optionFigureAnimationDurationDefault;
+					else : 
+					$optionFigureAnimationDuration = "1500";				
+				endif; 
+			else : 
+				$optionFigureAnimationDuration = "1500";				
+			endif;
 			
 			if (isset($kfSettings['kf_field_text_default_color'])) :
 				$optionTextDefaultColor = $kfSettings['kf_field_text_default_color'];
@@ -118,7 +129,7 @@
 								}).animate({
 									countNum: parseFloat(counter.text())
 								}, {
-									duration: 1500,
+									duration: ' . $optionFigureAnimationDuration . ',
 									easing: "swing",
 									step: function() {
 										counter.text(Math.floor(this.countNum));

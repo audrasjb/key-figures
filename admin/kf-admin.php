@@ -75,8 +75,17 @@ function kf_settings_init(  ) {
 	// Default figure animation
 	add_settings_field( 
 		'kf_field_figure_default_animation', 
-		__( 'Figures animation', 'key-figures' ), 
+		__( 'Figures animation type', 'key-figures' ), 
 		'kf_field_figure_default_animation_render', 
+		'key_figures_page', 
+		'kf_key_figures_page_section' 
+	);
+
+	// Default figure size
+	add_settings_field( 
+		'kf_field_figure_default_animation_duration', 
+		__( 'Animation duration', 'key-figures' ), 
+		'kf_field_figure_default_animation_duration_render', 
 		'key_figures_page', 
 		'kf_key_figures_page_section' 
 	);
@@ -144,6 +153,20 @@ function kf_field_figure_default_animation_render(  ) {
 	</select>
 	<?php /*<p class="description"><?php echo __('Note: custom position is not ok with all WordPress themes. It needs a fixed element to stick the progressbar on it. <br />You may need some custom CSS to put the progressbar on the right place as it uses absolute positionning.', 'key-figures'); ?></p> */ ?>
 <?php
+}
+
+
+function kf_field_figure_default_animation_duration_render(  ) { 
+	$options = get_option( 'kf_settings' );
+	if (isset($options['kf_field_figure_default_animation_duration'])) {
+		$optionFigureDefaultAnimationDuration = $options['kf_field_figure_default_animation_duration'];
+	} else {
+		$optionFigureDefaultAnimationDuration = '';		
+	}
+	?>
+	<input type="number" name="kf_settings[kf_field_figure_default_animation_duration]" value="<?php echo $optionFigureDefaultAnimationDuration; ?>" />
+	<span class="description"><?php echo __('If you selected an animation type below, milliseconds (2 seconds = 2000 milliseconds for example)', 'key-figures'); ?></span>
+	<?php
 }
 
 
