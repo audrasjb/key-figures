@@ -96,47 +96,47 @@
 			';
 			echo '</style>';
 			if (isset($kfSettings['kf_field_figure_default_animation']) && $kfSettings['kf_field_figure_default_animation'] != 'none') :
-				echo '<script>';
-				echo 'jQuery(window).load(function() {';
-				if ($optionFigureAnimation == 'counter') :
-echo "
-var a = 0;
-jQuery(window).scroll(function() {
-
-  var oTop = jQuery('.keyfigure_bloc').offset().top - window.innerHeight;
-  if (a == 0 && jQuery(window).scrollTop() > oTop) {
-    jQuery('.counter-value').each(function() {
-      var counter = $(this),
-        countTo = counter.attr('data-figure');
-      jQuery({
-        countNum: counter.text()
-      }).animate({
-          countNum: countTo
-        },
-
-        {
-
-          duration: 2000,
-          easing: 'swing',
-          step: function() {
-            counter.text(Math.floor(this.countNum));
-          },
-          complete: function() {
-            counter.text(this.countNum);
-            //alert('finished');
-          }
-
-        });
-    });
-    a = 1;
-  }
-
-});
-";
+				if ($optionFigureAnimation == "counter") :
+				echo '
+				<script>
+				jQuery(window).load(function() {
+					var keyFigures = new Array();
+					jQuery(".keyfigure_bloc_figure").each(function() {
+						keyFigures.push(0);
+						var counterFinalValue = jQuery(this).text();
+						jQuery(this).attr("data-value", counterFinalValue);
+					});
+					jQuery(window).scroll(function() {
+						var i = 0;
+						jQuery(".keyfigure_bloc_figure").each(function() {
+							var oTop = jQuery(this).offset().top - window.innerHeight;
+							if (keyFigures[i] == 0 && jQuery(window).scrollTop() > oTop) {
+								var counter = jQuery(this);
+								countTo = counter.children(this).attr("data-value");
+								jQuery({
+									countNum: 0
+								}).animate({
+									countNum: parseFloat(counter.text())
+								}, {
+									duration: 1500,
+									easing: "swing",
+									step: function() {
+										counter.text(Math.floor(this.countNum));
+									},
+									complete: function() {
+										counter.text(this.countNum);
+									}
+								});
+								keyFigures[i] = 1;
+							}
+							i++;
+						});
+					});
+				});
+				</script>
+				';
 				elseif ($optionFigureAnimation == 'fadein') :
 				endif ;		
-				echo '});';		
-				echo '</script>';
 			endif;
 		}
 	}
