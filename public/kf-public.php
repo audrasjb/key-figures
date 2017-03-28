@@ -110,13 +110,15 @@
 				if ($optionFigureAnimation == "counter") :
 				echo '
 				<script>
-				jQuery(window).load(function() {
+				jQuery(function() {
 					var keyFigures = new Array();
 					jQuery(".keyfigure_bloc_figure").each(function() {
 						keyFigures.push(0);
 						var counterFinalValue = jQuery(this).text();
 						jQuery(this).attr("data-value", counterFinalValue);
 					});
+				});
+				jQuery(window).load(function() {
 					jQuery(window).scroll(function() {
 						var i = 0;
 						jQuery(".keyfigure_bloc_figure").each(function() {

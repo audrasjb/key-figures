@@ -161,11 +161,11 @@ function kf_field_figure_default_animation_duration_render(  ) {
 	if (isset($options['kf_field_figure_default_animation_duration'])) {
 		$optionFigureDefaultAnimationDuration = $options['kf_field_figure_default_animation_duration'];
 	} else {
-		$optionFigureDefaultAnimationDuration = '';		
+		$optionFigureDefaultAnimationDuration = '1500';		
 	}
 	?>
 	<input type="number" name="kf_settings[kf_field_figure_default_animation_duration]" value="<?php echo $optionFigureDefaultAnimationDuration; ?>" />
-	<span class="description"><?php echo __('If you selected an animation type below, milliseconds (2 seconds = 2000 milliseconds for example)', 'key-figures'); ?></span>
+	<span class="description"><?php echo __('If you selected an animation type below, you can choose it’s duration in milliseconds (1 second = 1000 milliseconds)', 'key-figures'); ?></span>
 	<?php
 }
 
