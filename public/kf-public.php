@@ -104,15 +104,92 @@
 				$optionBoxBgColor = "#fff";				
 			endif;
 
-			if (isset($kfSettings['kf_field_box_default_border_color'])) :
-				$optionBoxDefaultBorderColor = $kfSettings['kf_field_box_default_border_color'];
-				if ($optionBoxDefaultBorderColor) : 
-					$optionBoxBorderColor = $optionBoxDefaultBorderColor;
+			if (isset($kfSettings['kf_field_box_default_border_top_color'])) :
+				$optionBoxDefaultBorderTopColor = $kfSettings['kf_field_box_default_border_top_color'];
+				if ($optionBoxDefaultBorderTopColor) : 
+					$optionBoxBorderTopColor = $optionBoxDefaultBorderTopColor;
 				else : 
-					$optionBoxBorderColor = "#fff";				
+					$optionBoxBorderTopColor = "#fff";				
 				endif; 
 			else : 
-				$optionBoxBorderColor = "#fff";				
+				$optionBoxBorderTopColor = "#fff";				
+			endif;
+
+			if (isset($kfSettings['kf_field_box_default_border_right_color'])) :
+				$optionBoxDefaultBorderRightColor = $kfSettings['kf_field_box_default_border_right_color'];
+				if ($optionBoxDefaultBorderRightColor) : 
+					$optionBoxBorderRightColor = $optionBoxDefaultBorderRightColor;
+				else : 
+					$optionBoxBorderRightColor = "#fff";				
+				endif; 
+			else : 
+				$optionBoxBorderRightColor = "#fff";				
+			endif;
+
+			if (isset($kfSettings['kf_field_box_default_border_bottom_color'])) :
+				$optionBoxDefaultBorderBottomColor = $kfSettings['kf_field_box_default_border_bottom_color'];
+				if ($optionBoxDefaultBorderBottomColor) : 
+					$optionBoxBorderBottomColor = $optionBoxDefaultBorderBottomColor;
+				else : 
+					$optionBoxBorderBottomColor = "#fff";				
+				endif; 
+			else : 
+				$optionBoxBorderBottomColor = "#fff";				
+			endif;
+
+			if (isset($kfSettings['kf_field_box_default_border_left_color'])) :
+				$optionBoxDefaultBorderLeftColor = $kfSettings['kf_field_box_default_border_left_color'];
+				if ($optionBoxDefaultBorderLeftColor) : 
+					$optionBoxBorderLeftColor = $optionBoxDefaultBorderLeftColor;
+				else : 
+					$optionBoxBorderLeftColor = "#fff";				
+				endif; 
+			else : 
+				$optionBoxBorderLeftColor = "#fff";				
+			endif;
+
+			if (isset($kfSettings['kf_field_box_default_border_top_thickness'])) :
+				$optionBoxDefaultBorderTopThickness = $kfSettings['kf_field_box_default_border_top_thickness'];
+				if ($optionBoxDefaultBorderTopThickness) : 
+					$optionBoxBorderTopThickness = $optionBoxDefaultBorderTopThickness . 'px';
+				else : 
+					$optionBoxBorderTopThickness = "0px";				
+				endif; 
+			else : 
+				$optionBoxBorderTopThickness = "0px";				
+			endif;
+
+			if (isset($kfSettings['kf_field_box_default_border_right_thickness'])) :
+				$optionBoxDefaultBorderRightThickness = $kfSettings['kf_field_box_default_border_right_thickness'];
+				if ($optionBoxDefaultBorderRightThickness) : 
+					$optionBoxBorderRightThickness = $optionBoxDefaultBorderRightThickness . 'px';
+				else : 
+					$optionBoxBorderRightThickness = "0px";				
+				endif; 
+			else : 
+				$optionBoxBorderRightThickness = "0px";				
+			endif;
+
+			if (isset($kfSettings['kf_field_box_default_border_bottom_thickness'])) :
+				$optionBoxDefaultBorderBottomThickness = $kfSettings['kf_field_box_default_border_bottom_thickness'];
+				if ($optionBoxDefaultBorderBottomThickness) : 
+					$optionBoxBorderBottomThickness = $optionBoxDefaultBorderBottomThickness . 'px';
+				else : 
+					$optionBoxBorderBottomThickness = "0px";				
+				endif; 
+			else : 
+				$optionBoxBorderBottomThickness = "0px";				
+			endif;
+
+			if (isset($kfSettings['kf_field_box_default_border_left_thickness'])) :
+				$optionBoxDefaultBorderLeftThickness = $kfSettings['kf_field_box_default_border_left_thickness'];
+				if ($optionBoxDefaultBorderLeftThickness) : 
+					$optionBoxBorderLeftThickness = $optionBoxDefaultBorderLeftThickness . 'px';
+				else : 
+					$optionBoxBorderLeftThickness = "0px";				
+				endif; 
+			else : 
+				$optionBoxBorderLeftThickness = "0px";				
 			endif;
 
 			if (isset($kfSettings['kf_field_box_default_padding_top'])) :
@@ -163,22 +240,26 @@
 				$textPositionCSS_Block = 'display:inline-block; text-align:center;';
 				$textPositionCSS_Figure = 'display:block;';
 				$textPositionCSS_Text = 'display:block;';
-				$textPositionCSS_jQuery = 'var KFelements = jQuery(this).parent(); var KFordered = KFelements.children("span"); KFelements.append(KFordered.get().reverse());';
+				$textPositionJS_Order = 'var KFelements = jQuery(this).parent(); var KFordered = KFelements.children("span"); KFelements.append(KFordered.get().reverse());';
+				$textPositionJS_Size = '';
 			elseif ($optionTextPosition == 'right') :
 				$textPositionCSS_Block = 'display:table;';
 				$textPositionCSS_Figure = 'display:table-cell;';
 				$textPositionCSS_Text = 'display:table-cell; vertical-align: middle; padding-left: 1em;';
-				$textPositionCSS_jQuery = '';
+				$textPositionJS_Order = '';
+				$textPositionJS_Size = 'jQuery(this).css("width", jQuery(this).width());';
 			elseif ($optionTextPosition == 'bottom') :
 				$textPositionCSS_Block = 'display:inline-block; text-align:center;';
 				$textPositionCSS_Figure = 'display:block;';
 				$textPositionCSS_Text = 'display:block;';
-				$textPositionCSS_jQuery = '';
+				$textPositionJS_Order = '';
+				$textPositionJS_Size = '';
 			elseif ($optionTextPosition == 'left') :
 				$textPositionCSS_Block = 'display:table;';
 				$textPositionCSS_Figure = 'display:table-cell;';
 				$textPositionCSS_Text = 'display:table-cell; vertical-align: middle; padding-right: 1em;';
-				$textPositionCSS_jQuery = 'var KFelements = jQuery(this).parent(); var KFordered = KFelements.children("span"); KFelements.append(KFordered.get().reverse());';
+				$textPositionJS_Order = 'var KFelements = jQuery(this).parent(); var KFordered = KFelements.children("span"); KFelements.append(KFordered.get().reverse());';
+				$textPositionJS_Size = 'jQuery(this).css("width", jQuery(this).width());';
 			endif;
 			
 			echo '<style>';
@@ -194,7 +275,10 @@
 				padding-left: ' . $optionBoxPaddingLeft . ';
 				margin: 0;
 				background-color: ' . $optionBoxBgColor . ';
-				border: 3px solid ' . $optionBoxBorderColor . ';
+				border-top: ' . $optionBoxBorderTopThickness . ' solid ' . $optionBoxBorderTopColor . ';
+				border-right: ' . $optionBoxBorderRightThickness . ' solid ' . $optionBoxBorderRightColor . ';
+				border-bottom: ' . $optionBoxBorderBottomThickness . ' solid ' . $optionBoxBorderBottomColor . ';
+				border-left: ' . $optionBoxBorderLeftThickness . ' solid ' . $optionBoxBorderLeftColor . ';
 			}
 			.keyfigure_bloc_figure {
 				' . $textPositionCSS_Figure . '
@@ -216,9 +300,9 @@
 				jQuery(window).load(function() {
 					var keyFigures = new Array();
 					jQuery(".keyfigure_bloc_figure").each(function() {
-						' . $textPositionCSS_jQuery . '
+						' . $textPositionJS_Size . '
 						keyFigures.push(0);
-						jQuery(this).css("width", jQuery(this).width());
+						' . $textPositionJS_Order . '
 						var counterFinalValue = jQuery(this).text();
 						jQuery(this).attr("data-value", counterFinalValue);
 					});

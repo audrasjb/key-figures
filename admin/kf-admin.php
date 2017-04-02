@@ -280,13 +280,73 @@ function kf_field_box_default_bgcolor_render(  ) {
 
 function kf_field_box_default_border_color_render(  ) { 
 	$options = get_option( 'kf_settings' );
-	if (isset($options['kf_field_box_default_border_color'])) {
-		$optionBoxDefaultBorderColor = $options['kf_field_box_default_border_color'];
+	if (isset($options['kf_field_box_default_border_top_color'])) {
+		$optionBoxDefaultBorderTopColor = $options['kf_field_box_default_border_top_color'];
 	} else {
-		$optionBoxDefaultBorderColor = '';		
+		$optionBoxDefaultBorderTopColor = '';		
+	}
+	if (isset($options['kf_field_box_default_border_top_thickness'])) {
+		$optionBoxDefaultBorderTopThickness = $options['kf_field_box_default_border_top_thickness'];
+	} else {
+		$optionBoxDefaultBorderTopThickness = '';		
+	}
+	if (isset($options['kf_field_box_default_border_right_color'])) {
+		$optionBoxDefaultBorderRightColor = $options['kf_field_box_default_border_right_color'];
+	} else {
+		$optionBoxDefaultBorderRightColor = '';		
+	}
+	if (isset($options['kf_field_box_default_border_right_thickness'])) {
+		$optionBoxDefaultBorderRightThickness = $options['kf_field_box_default_border_right_thickness'];
+	} else {
+		$optionBoxDefaultBorderRightThickness = '';		
+	}
+	if (isset($options['kf_field_box_default_border_bottom_color'])) {
+		$optionBoxDefaultBorderBottomColor = $options['kf_field_box_default_border_bottom_color'];
+	} else {
+		$optionBoxDefaultBorderBottomColor = '';		
+	}
+	if (isset($options['kf_field_box_default_border_bottom_thickness'])) {
+		$optionBoxDefaultBorderBottomThickness = $options['kf_field_box_default_border_bottom_thickness'];
+	} else {
+		$optionBoxDefaultBorderBottomThickness = '';		
+	}
+	if (isset($options['kf_field_box_default_border_left_color'])) {
+		$optionBoxDefaultBorderLeftColor = $options['kf_field_box_default_border_left_color'];
+	} else {
+		$optionBoxDefaultBorderLeftColor = '';		
+	}
+	if (isset($options['kf_field_box_default_border_left_thickness'])) {
+		$optionBoxDefaultBorderLeftThickness = $options['kf_field_box_default_border_left_thickness'];
+	} else {
+		$optionBoxDefaultBorderLeftThickness = '';		
 	}
 	?>
-	<input type="text" class="kf-colorpicker" name="kf_settings[kf_field_box_default_border_color]" value="<?php echo $optionBoxDefaultBorderColor; ?>" />
+	<span class="description" style="display:inline-block;width: 60px;position: relative;top: -8px;"><?php echo __('Top:', 'key-figures'); ?> </span>
+	<input type="text" class="kf-colorpicker" name="kf_settings[kf_field_box_default_border_top_color]" value="<?php echo $optionBoxDefaultBorderTopColor; ?>" />
+	<span class="description" style="display:inline-block;padding-left: 2em;position: relative;top: -8px;"><?php echo __('Thickness:', 'key-figures'); ?> </span>
+	<input type="number" style="position:relative;top:-8px;" class="small-text" name="kf_settings[kf_field_box_default_border_top_thickness]" value="<?php echo $optionBoxDefaultBorderTopThickness; ?>" />
+	<span class="description" style="position:relative;top:-8px;"><?php echo __('Pixels (px)', 'key-figures'); ?></span>
+	<br />
+
+	<span class="description" style="display:inline-block;width: 60px;position: relative;top: -8px;"><?php echo __('Right:', 'key-figures'); ?> </span>
+	<input type="text" class="kf-colorpicker" name="kf_settings[kf_field_box_default_border_right_color]" value="<?php echo $optionBoxDefaultBorderRightColor; ?>" />
+	<span class="description" style="display:inline-block;padding-left: 2em;position: relative;top: -8px;"><?php echo __('Thickness:', 'key-figures'); ?> </span>
+	<input type="number" style="position:relative;top:-8px;" class="small-text" name="kf_settings[kf_field_box_default_border_right_thickness]" value="<?php echo $optionBoxDefaultBorderRightThickness; ?>" />
+	<span class="description" style="position:relative;top:-8px;"><?php echo __('Pixels (px)', 'key-figures'); ?></span>
+	<br />
+
+	<span class="description" style="display:inline-block;width: 60px;position: relative;top: -8px;"><?php echo __('Bottom:', 'key-figures'); ?> </span>
+	<input type="text" class="kf-colorpicker" name="kf_settings[kf_field_box_default_border_bottom_color]" value="<?php echo $optionBoxDefaultBorderBottomColor; ?>" />
+	<span class="description" style="display:inline-block;padding-left: 2em;position: relative;top: -8px;"><?php echo __('Thickness:', 'key-figures'); ?> </span>
+	<input type="number" style="position:relative;top:-8px;" class="small-text" name="kf_settings[kf_field_box_default_border_bottom_thickness]" value="<?php echo $optionBoxDefaultBorderBottomThickness; ?>" />
+	<span class="description" style="position:relative;top:-8px;"><?php echo __('Pixels (px)', 'key-figures'); ?></span>
+	<br />
+
+	<span class="description" style="display:inline-block;width: 60px;position: relative;top: -8px;"><?php echo __('Left:', 'key-figures'); ?> </span>
+	<input type="text" class="kf-colorpicker" name="kf_settings[kf_field_box_default_border_left_color]" value="<?php echo $optionBoxDefaultBorderLeftColor; ?>" />
+	<span class="description" style="display:inline-block;padding-left: 2em;position: relative;top: -8px;"><?php echo __('Thickness:', 'key-figures'); ?> </span>
+	<input type="number" style="position:relative;top:-8px;" class="small-text" name="kf_settings[kf_field_box_default_border_left_thickness]" value="<?php echo $optionBoxDefaultBorderLeftThickness; ?>" />
+	<span class="description" style="position:relative;top:-8px;"><?php echo __('Pixels (px)', 'key-figures'); ?></span>
 	<?php
 }
 
