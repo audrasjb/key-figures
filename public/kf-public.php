@@ -81,6 +81,29 @@
 			else : 
 				$optionTextSize = "18";				
 			endif;
+
+			if (isset($kfSettings['kf_field_box_default_bgcolor'])) :
+				$optionBoxDefaultBgColor = $kfSettings['kf_field_box_default_bgcolor'];
+				if ($optionBoxDefaultBgColor) : 
+					$optionBoxBgColor = $optionBoxDefaultBgColor;
+				else : 
+					$optionBoxBgColor = "#fff";				
+				endif; 
+			else : 
+				$optionBoxBgColor = "#fff";				
+			endif;
+
+			if (isset($kfSettings['kf_field_box_default_border_color'])) :
+				$optionBoxDefaultBorderColor = $kfSettings['kf_field_box_default_border_color'];
+				if ($optionBoxDefaultBorderColor) : 
+					$optionBoxBorderColor = $optionBoxDefaultBorderColor;
+				else : 
+					$optionBoxBorderColor = "#fff";				
+				endif; 
+			else : 
+				$optionBoxBorderColor = "#fff";				
+			endif;
+
 			echo '<style>';
 			echo '
 			/**
@@ -90,6 +113,8 @@
 				display: table;
 				padding: 0;
 				margin: 0;
+				background-color: ' . $optionBoxBgColor . ';
+				border: ' . $optionBoxBorderColor . ';
 			}
 			.keyfigure_bloc_figure {
 				display: table-cell;

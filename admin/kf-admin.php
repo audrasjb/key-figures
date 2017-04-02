@@ -46,11 +46,11 @@ function kf_settings_init(  ) {
 
 	register_setting( 'key_figures_page', 'kf_settings' );
 
-	// Main section
+	// Figures section
 	add_settings_section(
-		'kf_key_figures_page_section', 
-		__( 'Key figures settings', 'key-figures' ), 
-		'kf_settings_section_callback', 
+		'kf_key_figures_page_section_figures', 
+		__( 'Figures settings', 'key-figures' ), 
+		'kf_settings_section_figures_callback', 
 		'key_figures_page'
 	);
 
@@ -60,7 +60,7 @@ function kf_settings_init(  ) {
 		__( 'Figures color', 'key-figures' ), 
 		'kf_field_figure_default_color_render', 
 		'key_figures_page', 
-		'kf_key_figures_page_section' 
+		'kf_key_figures_page_section_figures' 
 	);
 
 	// Default figure size
@@ -69,7 +69,7 @@ function kf_settings_init(  ) {
 		__( 'Figures size', 'key-figures' ), 
 		'kf_field_figure_default_size_render', 
 		'key_figures_page', 
-		'kf_key_figures_page_section' 
+		'kf_key_figures_page_section_figures' 
 	);
 
 	// Default figure animation
@@ -78,7 +78,7 @@ function kf_settings_init(  ) {
 		__( 'Figures animation type', 'key-figures' ), 
 		'kf_field_figure_default_animation_render', 
 		'key_figures_page', 
-		'kf_key_figures_page_section' 
+		'kf_key_figures_page_section_figures' 
 	);
 
 	// Default figure size
@@ -87,16 +87,24 @@ function kf_settings_init(  ) {
 		__( 'Animation duration', 'key-figures' ), 
 		'kf_field_figure_default_animation_duration_render', 
 		'key_figures_page', 
-		'kf_key_figures_page_section' 
+		'kf_key_figures_page_section_figures' 
 	);
 	
+	// Text section
+	add_settings_section(
+		'kf_key_figures_page_section_text', 
+		__( 'Text settings', 'key-figures' ), 
+		'kf_settings_section_text_callback', 
+		'key_figures_page'
+	);
+
 	// Default text color
 	add_settings_field( 
 		'kf_field_text_default_color', 
 		__( 'Text color', 'key-figures' ), 
 		'kf_field_text_default_color_render', 
 		'key_figures_page', 
-		'kf_key_figures_page_section' 
+		'kf_key_figures_page_section_text' 
 	);
 
 	// Default text size
@@ -105,7 +113,33 @@ function kf_settings_init(  ) {
 		__( 'Text size', 'key-figures' ), 
 		'kf_field_text_default_size_render', 
 		'key_figures_page', 
-		'kf_key_figures_page_section' 
+		'kf_key_figures_page_section_text' 
+	);
+
+	// Box section
+	add_settings_section(
+		'kf_key_figures_page_section_box', 
+		__( 'Box settings', 'key-figures' ), 
+		'kf_settings_section_box_callback', 
+		'key_figures_page'
+	);
+
+	// Default background color
+	add_settings_field( 
+		'kf_field_box_default_bgcolor', 
+		__( 'Background color', 'key-figures' ), 
+		'kf_field_box_default_bgcolor_render', 
+		'key_figures_page', 
+		'kf_key_figures_page_section_box' 
+	);
+
+	// Default border color
+	add_settings_field( 
+		'kf_field_box_default_border_color', 
+		__( 'Border color', 'key-figures' ), 
+		'kf_field_box_default_border_color_render', 
+		'key_figures_page', 
+		'kf_key_figures_page_section_box' 
 	);
 
 }
@@ -132,7 +166,7 @@ function kf_field_figure_default_size_render(  ) {
 		$optionFigureDefaultSize = '';		
 	}
 	?>
-	<input type="number" name="kf_settings[kf_field_figure_default_size]" value="<?php echo $optionFigureDefaultSize; ?>" />
+	<input type="number" class="small-text" name="kf_settings[kf_field_figure_default_size]" value="<?php echo $optionFigureDefaultSize; ?>" />
 	<span class="description"><?php echo __('Pixels (px)', 'key-figures'); ?></span>
 	<?php
 }
@@ -164,7 +198,7 @@ function kf_field_figure_default_animation_duration_render(  ) {
 		$optionFigureDefaultAnimationDuration = '1500';		
 	}
 	?>
-	<input type="number" name="kf_settings[kf_field_figure_default_animation_duration]" value="<?php echo $optionFigureDefaultAnimationDuration; ?>" />
+	<input type="number" class="small-text" name="kf_settings[kf_field_figure_default_animation_duration]" value="<?php echo $optionFigureDefaultAnimationDuration; ?>" />
 	<span class="description"><?php echo __('If you selected an animation type below, you can choose it’s duration in milliseconds (1 second = 1000 milliseconds)', 'key-figures'); ?></span>
 	<?php
 }
@@ -191,31 +225,65 @@ function kf_field_text_default_size_render(  ) {
 		$optionTextDefaultSize = '';		
 	}
 	?>
-	<input type="number" name="kf_settings[kf_field_text_default_size]" value="<?php echo $optionTextDefaultSize; ?>" />
+	<input type="number" class="small-text" name="kf_settings[kf_field_text_default_size]" value="<?php echo $optionTextDefaultSize; ?>" />
 	<span class="description"><?php echo __('Pixels (px)', 'key-figures'); ?></span>
+	<?php
+}
+
+function kf_field_box_default_bgcolor_render(  ) { 
+	$options = get_option( 'kf_settings' );
+	if (isset($options['kf_field_box_default_bgcolor'])) {
+		$optionBoxDefaultBgColor = $options['kf_field_box_default_bgcolor'];
+	} else {
+		$optionBoxDefaultBgColor = '';		
+	}
+	?>
+	<input type="text" class="kf-colorpicker" name="kf_settings[kf_field_box_default_bgcolor]" value="<?php echo $optionBoxDefaultBgColor; ?>" />
+	<?php
+}
+
+function kf_field_box_default_border_color_render(  ) { 
+	$options = get_option( 'kf_settings' );
+	if (isset($options['kf_field_box_default_border_color'])) {
+		$optionBoxDefaultBorderColor = $options['kf_field_box_default_border_color'];
+	} else {
+		$optionBoxDefaultBorderColor = '';		
+	}
+	?>
+	<input type="text" class="kf-colorpicker" name="kf_settings[kf_field_box_default_border_color]" value="<?php echo $optionBoxDefaultBorderColor; ?>" />
 	<?php
 }
 
 
 function kf_settings_section_callback(  ) { 
-
 	echo __( 'Manage key figures default options below.', 'key-figures' );
+}
 
+function kf_settings_section_figures_callback(  ) { 
+}
+
+function kf_settings_section_text_callback(  ) { 
+}
+
+function kf_settings_section_box_callback(  ) { 
 }
 
 
 function kf_options_page(  ) { 
 
 	?>
-	<form action='options.php' method='post'>
+	<div class="wrap">
+		<h1><?php echo __('Key figures settings', 'key-figures'); ?></h1>
+		<p><?php echo __('Manage <em>key figures</em> settings below.', 'key-figures'); ?></p>
 
+		<form action='options.php' method='post'>
 		<?php
 		settings_fields( 'key_figures_page' );
 		do_settings_sections( 'key_figures_page' );
 		submit_button();
 		?>
-
-	</form>
+		</form>
+	</div>
 	<?php
 
 }
