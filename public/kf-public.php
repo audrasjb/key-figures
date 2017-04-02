@@ -186,6 +186,7 @@
 					var keyFigures = new Array();
 					jQuery(".keyfigure_bloc_figure").each(function() {
 						keyFigures.push(0);
+						jQuery(this).css("width", jQuery(this).width());
 						var counterFinalValue = jQuery(this).text();
 						jQuery(this).attr("data-value", counterFinalValue);
 					});
@@ -224,7 +225,7 @@
 				jQuery(window).load(function() {
 					var keyFigures = new Array();
 					jQuery(".keyfigure_bloc_figure").each(function() {
-						jQuery(this).hide();
+						jQuery(this).parent().hide();
 						keyFigures.push(0);
 					});
 					jQuery(window).scroll(function() {
@@ -232,7 +233,7 @@
 						jQuery(".keyfigure_bloc_figure").each(function() {
 							var oTop = jQuery(this).offset().top - window.innerHeight;
 							if (keyFigures[i] == 0 && jQuery(window).scrollTop() > oTop) {
-								jQuery(this).fadeIn(' . $optionFigureAnimationDuration . ');
+								jQuery(this).parent().fadeIn(' . $optionFigureAnimationDuration . ');
 								keyFigures[i] = 1;
 							}
 							i++;
