@@ -59,6 +59,17 @@
 			else : 
 				$optionFigureAnimationDuration = "1500";				
 			endif;
+
+			if (isset($kfSettings['kf_field_text_default_position'])) :
+				$optionTextDefaultPosition = $kfSettings['kf_field_text_default_position'];
+				if ($optionTextDefaultPosition) : 
+					$optionTextPosition = $optionTextDefaultPosition;
+				else : 
+					$optionTextPosition = "right";				
+				endif; 
+			else : 
+				$optionTextPosition = "right";				
+			endif;
 			
 			if (isset($kfSettings['kf_field_text_default_color'])) :
 				$optionTextDefaultColor = $kfSettings['kf_field_text_default_color'];
@@ -148,13 +159,35 @@
 				$optionBoxPaddingLeft = "10px";				
 			endif;
 
+			if ($optionTextPosition == 'top') :
+				$textPositionCSS_Block = 'display:inline-block; text-align:center;';
+				$textPositionCSS_Figure = 'display:block;';
+				$textPositionCSS_Text = 'display:block;';
+				$textPositionCSS_jQuery = 'var KFelements = jQuery(this).parent(); var KFordered = KFelements.children("span"); KFelements.append(KFordered.get().reverse());';
+			elseif ($optionTextPosition == 'right') :
+				$textPositionCSS_Block = 'display:table;';
+				$textPositionCSS_Figure = 'display:table-cell;';
+				$textPositionCSS_Text = 'display:table-cell; vertical-align: middle; padding-left: 1em;';
+				$textPositionCSS_jQuery = '';
+			elseif ($optionTextPosition == 'bottom') :
+				$textPositionCSS_Block = 'display:inline-block; text-align:center;';
+				$textPositionCSS_Figure = 'display:block;';
+				$textPositionCSS_Text = 'display:block;';
+				$textPositionCSS_jQuery = '';
+			elseif ($optionTextPosition == 'left') :
+				$textPositionCSS_Block = 'display:table;';
+				$textPositionCSS_Figure = 'display:table-cell;';
+				$textPositionCSS_Text = 'display:table-cell; vertical-align: middle; padding-right: 1em;';
+				$textPositionCSS_jQuery = 'var KFelements = jQuery(this).parent(); var KFordered = KFelements.children("span"); KFelements.append(KFordered.get().reverse());';
+			endif;
+			
 			echo '<style>';
 			echo '
 			/**
 			* Key Figures stylesheet
 			*/
 			.keyfigure_bloc {
-				display: table;
+				' . $textPositionCSS_Block . '
 				padding-top: ' . $optionBoxPaddingTop . ';
 				padding-right: ' . $optionBoxPaddingRight . ';
 				padding-bottom: ' . $optionBoxPaddingBottom . ';
@@ -164,15 +197,13 @@
 				border: 3px solid ' . $optionBoxBorderColor . ';
 			}
 			.keyfigure_bloc_figure {
-				display: table-cell;
+				' . $textPositionCSS_Figure . '
 				vertical-align: middle;
 				font-size: ' . $optionFigureSize . 'px;
 				color: ' . $optionFigureColor . ';
 			}
 			.keyfigure_bloc_text {
-				display: table-cell;
-				vertical-align: middle;
-				padding-left: 1em;
+				' . $textPositionCSS_Text . '
 				font-size: ' . $optionTextSize . 'px;
 				color: ' . $optionTextColor . ';
 			}
@@ -185,6 +216,7 @@
 				jQuery(window).load(function() {
 					var keyFigures = new Array();
 					jQuery(".keyfigure_bloc_figure").each(function() {
+						' . $textPositionCSS_jQuery . '
 						keyFigures.push(0);
 						jQuery(this).css("width", jQuery(this).width());
 						var counterFinalValue = jQuery(this).text();

@@ -98,6 +98,15 @@ function kf_settings_init(  ) {
 		'key_figures_page'
 	);
 
+	// Default text position
+	add_settings_field( 
+		'kf_field_text_default_position', 
+		__( 'Text position', 'key-figures' ), 
+		'kf_field_text_default_position_render', 
+		'key_figures_page', 
+		'kf_key_figures_page_section_text' 
+	);
+
 	// Default text color
 	add_settings_field( 
 		'kf_field_text_default_color', 
@@ -210,6 +219,24 @@ function kf_field_figure_default_animation_duration_render(  ) {
 	<input type="number" class="small-text" name="kf_settings[kf_field_figure_default_animation_duration]" value="<?php echo $optionFigureDefaultAnimationDuration; ?>" />
 	<span class="description"><?php echo __('If you selected an animation type below, you can choose it’s duration in milliseconds (1 second = 1000 milliseconds)', 'key-figures'); ?></span>
 	<?php
+}
+
+
+function kf_field_text_default_position_render(  ) { 
+	$options = get_option( 'kf_settings' );
+	if (isset($options['kf_field_text_default_position'])) {
+		$optionTextPositionDefault = $options['kf_field_text_default_position'];
+	} else {
+		$optionTextPositionDefault = 'right';		
+	}
+	?>
+	<select name='kf_settings[kf_field_text_default_position]'>
+		<option value="top" <?php selected( $optionTextPositionDefault, 'top' ); ?>><?php echo __('Top', 'key-figures'); ?></option>
+		<option value="right" <?php selected( $optionTextPositionDefault, 'right' ); ?>><?php echo __('Right', 'key-figures'); ?></option>
+		<option value="bottom" <?php selected( $optionTextPositionDefault, 'bottom' ); ?>><?php echo __('Bottom', 'key-figures'); ?></option>
+		<option value="left" <?php selected( $optionTextPositionDefault, 'left' ); ?>><?php echo __('Left', 'key-figures'); ?></option>
+	</select>
+<?php
 }
 
 
