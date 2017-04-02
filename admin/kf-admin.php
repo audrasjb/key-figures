@@ -142,6 +142,15 @@ function kf_settings_init(  ) {
 		'kf_key_figures_page_section_box' 
 	);
 
+	// Default box padding
+	add_settings_field( 
+		'kf_field_box_default_padding', 
+		__( 'Padding', 'key-figures' ), 
+		'kf_field_box_default_padding_render', 
+		'key_figures_page', 
+		'kf_key_figures_page_section_box' 
+	);
+
 }
 
 
@@ -251,6 +260,49 @@ function kf_field_box_default_border_color_render(  ) {
 	}
 	?>
 	<input type="text" class="kf-colorpicker" name="kf_settings[kf_field_box_default_border_color]" value="<?php echo $optionBoxDefaultBorderColor; ?>" />
+	<?php
+}
+
+function kf_field_box_default_padding_render(  ) { 
+	$options = get_option( 'kf_settings' );
+	if (isset($options['kf_field_box_default_padding_top'])) {
+		$optionBoxDefaultPaddingTop = $options['kf_field_box_default_padding_top'];
+	} else {
+		$optionBoxDefaultPaddingTop = '';		
+	}
+	if (isset($options['kf_field_box_default_padding_right'])) {
+		$optionBoxDefaultPaddingRight = $options['kf_field_box_default_padding_right'];
+	} else {
+		$optionBoxDefaultPaddingRight = '';		
+	}
+	if (isset($options['kf_field_box_default_padding_bottom'])) {
+		$optionBoxDefaultPaddingBottom = $options['kf_field_box_default_padding_bottom'];
+	} else {
+		$optionBoxDefaultPaddingBottom = '';		
+	}
+	if (isset($options['kf_field_box_default_padding_left'])) {
+		$optionBoxDefaultPaddingLeft = $options['kf_field_box_default_padding_left'];
+	} else {
+		$optionBoxDefaultPaddingLeft = '';		
+	}
+	?>
+	<span class="description" style="display:inline-block;width: 60px;"><?php echo __('Top:', 'key-figures'); ?> </span>
+	<input type="number" class="small-text" name="kf_settings[kf_field_box_default_padding_top]" value="<?php echo $optionBoxDefaultPaddingTop; ?>" />
+	<span class="description"><?php echo __('Pixels (px)', 'key-figures'); ?></span><br />
+
+	<span class="description" style="display:inline-block;width: 60px;"><?php echo __('Right:', 'key-figures'); ?> </span>
+	<input type="number" class="small-text" name="kf_settings[kf_field_box_default_padding_right]" value="<?php echo $optionBoxDefaultPaddingRight; ?>" />
+	<span class="description"><?php echo __('Pixels (px)', 'key-figures'); ?></span><br />
+
+	<span class="description" style="display:inline-block;width: 60px;"><?php echo __('Bottom:', 'key-figures'); ?> </span>
+	<input type="number" class="small-text" name="kf_settings[kf_field_box_default_padding_bottom]" value="<?php echo $optionBoxDefaultPaddingBottom; ?>" />
+	<span class="description"><?php echo __('Pixels (px)', 'key-figures'); ?></span><br />
+
+	<span class="description" style="display:inline-block;width: 60px;"><?php echo __('Left:', 'key-figures'); ?> </span>
+	<input type="number" class="small-text" name="kf_settings[kf_field_box_default_padding_left]" value="<?php echo $optionBoxDefaultPaddingLeft; ?>" />
+	<span class="description"><?php echo __('Pixels (px)', 'key-figures'); ?></span><br />
+	<br />
+	<span class="description"><?php echo __('Note: the padding is the space between the box and it’s content.', 'key-figures'); ?></span>
 	<?php
 }
 

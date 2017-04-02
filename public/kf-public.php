@@ -104,6 +104,50 @@
 				$optionBoxBorderColor = "#fff";				
 			endif;
 
+			if (isset($kfSettings['kf_field_box_default_padding_top'])) :
+				$optionBoxDefaultPaddingTop = $kfSettings['kf_field_box_default_padding_top'];
+				if ($optionBoxDefaultPaddingTop) : 
+					$optionBoxPaddingTop = $optionBoxDefaultPaddingTop . 'px';
+				else : 
+					$optionBoxPaddingTop = "5px";				
+				endif; 
+			else : 
+				$optionBoxPaddingTop = "5px";				
+			endif;
+			
+			if (isset($kfSettings['kf_field_box_default_padding_right'])) :
+				$optionBoxDefaultPaddingRight = $kfSettings['kf_field_box_default_padding_right'];
+				if ($optionBoxDefaultPaddingRight) : 
+					$optionBoxPaddingRight = $optionBoxDefaultPaddingRight . 'px';
+				else : 
+					$optionBoxPaddingRight = "10px";				
+				endif; 
+			else : 
+				$optionBoxPaddingRight = "10px";				
+			endif;
+			
+			if (isset($kfSettings['kf_field_box_default_padding_bottom'])) :
+				$optionBoxDefaultPaddingBottom = $kfSettings['kf_field_box_default_padding_bottom'];
+				if ($optionBoxDefaultPaddingBottom) : 
+					$optionBoxPaddingBottom = $optionBoxDefaultPaddingBottom . 'px';
+				else : 
+					$optionBoxPaddingBottom = "5px";				
+				endif; 
+			else : 
+				$optionBoxPaddingBottom = "5px";				
+			endif;
+			
+			if (isset($kfSettings['kf_field_box_default_padding_left'])) :
+				$optionBoxDefaultPaddingLeft = $kfSettings['kf_field_box_default_padding_left'];
+				if ($optionBoxDefaultPaddingLeft) : 
+					$optionBoxPaddingLeft = $optionBoxDefaultPaddingLeft . 'px';
+				else : 
+					$optionBoxPaddingLeft = "10px";				
+				endif; 
+			else : 
+				$optionBoxPaddingLeft = "10px";				
+			endif;
+
 			echo '<style>';
 			echo '
 			/**
@@ -111,10 +155,13 @@
 			*/
 			.keyfigure_bloc {
 				display: table;
-				padding: 0;
+				padding-top: ' . $optionBoxPaddingTop . ';
+				padding-right: ' . $optionBoxPaddingRight . ';
+				padding-bottom: ' . $optionBoxPaddingBottom . ';
+				padding-left: ' . $optionBoxPaddingLeft . ';
 				margin: 0;
 				background-color: ' . $optionBoxBgColor . ';
-				border: ' . $optionBoxBorderColor . ';
+				border: 3px solid ' . $optionBoxBorderColor . ';
 			}
 			.keyfigure_bloc_figure {
 				display: table-cell;
