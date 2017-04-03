@@ -312,7 +312,7 @@ function kf_field_box_default_width_render(  ) {
 		<option value="75%" <?php selected( $optionBoxDefaultWidth, '75%' ); ?>><?php echo __('75% of parent container', 'key-figures'); ?></option>
 		<option value="100%" <?php selected( $optionBoxDefaultWidth, '100%' ); ?>><?php echo __('100% of parent container', 'key-figures'); ?></option>
 	</select>
-	<p><span class="description"><?php echo __('Note: percents are relative to the container width. Please note that if you select <em>100% of parent container</em>, you should set paddings to 0 to prevent container overstepping.', 'key-figures'); ?></span></p>
+	<p><span class="description"><?php echo __('Note: percents are relative to the container width. Please note that if you select <em>100% of parent container</em>, you should set paddings to <code>0</code> to prevent container overstepping.', 'key-figures'); ?></span></p>
 <?php
 }
 
@@ -470,22 +470,25 @@ function kf_field_box_default_padding_render(  ) {
 	<input type="number" class="small-text" name="kf_settings[kf_field_box_default_padding_left]" value="<?php echo $optionBoxDefaultPaddingLeft; ?>" />
 	<span class="description"><?php echo __('Pixels (px)', 'key-figures'); ?></span><br />
 	<br />
-	<span class="description"><?php echo __('Note: the padding is the space between the box and it’s content.', 'key-figures'); ?></span>
+	<span class="description"><?php echo __('Note: paddings are spaces between the box and it’s content.', 'key-figures'); ?></span>
 	<?php
 }
 
 
 function kf_settings_section_callback(  ) { 
-	echo __( 'Manage key figures default options below.', 'key-figures' );
+	echo '<hr />';
 }
 
 function kf_settings_section_figures_callback(  ) { 
+	echo '<hr />';
 }
 
 function kf_settings_section_text_callback(  ) { 
+	echo '<hr />';
 }
 
 function kf_settings_section_box_callback(  ) { 
+	echo '<hr />';
 }
 
 
@@ -497,12 +500,20 @@ function kf_options_page(  ) {
 		<p><?php echo __('Manage <em>key figures</em> settings below.', 'key-figures'); ?></p>
 
 		<form action='options.php' method='post'>
+		
 		<?php
 		settings_fields( 'key_figures_page' );
 		do_settings_sections( 'key_figures_page' );
+		
+		echo '<hr />';
+		
 		submit_button();
 		?>
+		
 		</form>
+		
+		<hr />
+		
 <?php
 		if ( get_option( 'kf_settings' ) ) {
 			$kfSettings = get_option( 'kf_settings' );
