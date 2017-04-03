@@ -36,8 +36,8 @@ add_action( 'admin_init', 'kf_settings_init' );
 
 
 function kf_add_admin_menu(  ) { 
-	
-	add_theme_page( __('Key Figures settings', 'key-figures'), __('Key figures', 'key-figures'), 'manage_options', 'key-figures', 'kf_options_page' );
+
+	add_options_page( __('Key Figures settings', 'key-figures'), __('Key figures', 'key-figures'), 'manage_options', 'key-figures', 'kf_options_page' );
 
 }
 
