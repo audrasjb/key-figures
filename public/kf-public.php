@@ -104,6 +104,17 @@
 				$optionBoxBgColor = "#fff";				
 			endif;
 
+			if (isset($kfSettings['kf_field_box_default_width'])) :
+				$optionBoxDefaultWidth = $kfSettings['kf_field_box_default_width'];
+				if ($optionBoxDefaultWidth) : 
+					$optionBoxtWidth = $optionBoxDefaultWidth;
+				else : 
+					$optionBoxtWidth = "auto";				
+				endif; 
+			else : 
+				$optionBoxtWidth = "auto";				
+			endif;
+
 			if (isset($kfSettings['kf_field_box_default_border_top_color'])) :
 				$optionBoxDefaultBorderTopColor = $kfSettings['kf_field_box_default_border_top_color'];
 				if ($optionBoxDefaultBorderTopColor) : 
@@ -327,6 +338,7 @@
 				border-top-right-radius: ' . $optionBoxRadiusTopRight . ';
 				border-bottom-right-radius: ' . $optionBoxRadiusBottomRight . ';
 				border-bottom-left-radius: ' . $optionBoxRadiusBottomLeft . ';
+				width: ' . $optionBoxtWidth . ';
 			}
 			.keyfigure_bloc_figure {
 				' . $textPositionCSS_Figure . '

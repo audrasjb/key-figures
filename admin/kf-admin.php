@@ -142,11 +142,20 @@ function kf_settings_init(  ) {
 		'kf_key_figures_page_section_box' 
 	);
 
+	// Default width
+	add_settings_field( 
+		'kf_field_box_default_width', 
+		__( 'Width', 'key-figures' ), 
+		'kf_field_box_default_width_render', 
+		'key_figures_page', 
+		'kf_key_figures_page_section_box' 
+	);
+
 	// Default border settings
 	add_settings_field( 
-		'kf_field_box_default_border_color', 
+		'kf_field_box_default_border', 
 		__( 'Border color', 'key-figures' ), 
-		'kf_field_box_default_border_color_render', 
+		'kf_field_box_default_border_render', 
 		'key_figures_page', 
 		'kf_key_figures_page_section_box' 
 	);
@@ -287,7 +296,27 @@ function kf_field_box_default_bgcolor_render(  ) {
 	<?php
 }
 
-function kf_field_box_default_border_color_render(  ) { 
+function kf_field_box_default_width_render(  ) { 
+	$options = get_option( 'kf_settings' );
+	if (isset($options['kf_field_box_default_width'])) {
+		$optionBoxDefaultWidth = $options['kf_field_box_default_width'];
+	} else {
+		$optionBoxDefaultWidth = 'auto';		
+	}
+	?>
+	<select name='kf_settings[kf_field_box_default_width]'>
+		<option value="auto" <?php selected( $optionBoxDefaultWidth, 'auto' ); ?>><?php echo __('Auto (fit to content – recommended in most cases)', 'key-figures'); ?></option>
+		<option value="25%" <?php selected( $optionBoxDefaultWidth, '25%' ); ?>><?php echo __('25% of parent container', 'key-figures'); ?></option>
+		<option value="33%" <?php selected( $optionBoxDefaultWidth, '33%' ); ?>><?php echo __('33% of parent container', 'key-figures'); ?></option>
+		<option value="50%" <?php selected( $optionBoxDefaultWidth, '50%' ); ?>><?php echo __('50% of parent container', 'key-figures'); ?></option>
+		<option value="75%" <?php selected( $optionBoxDefaultWidth, '75%' ); ?>><?php echo __('75% of parent container', 'key-figures'); ?></option>
+		<option value="100%" <?php selected( $optionBoxDefaultWidth, '100%' ); ?>><?php echo __('100% of parent container', 'key-figures'); ?></option>
+	</select>
+	<p><span class="description"><?php echo __('Note: percents are relative to the container width. Please note that if you select <em>100% of parent container</em>, you should set paddings to 0 to prevent container overstepping.', 'key-figures'); ?></span></p>
+<?php
+}
+
+function kf_field_box_default_border_render(  ) { 
 	$options = get_option( 'kf_settings' );
 	if (isset($options['kf_field_box_default_border_top_color'])) {
 		$optionBoxDefaultBorderTopColor = $options['kf_field_box_default_border_top_color'];
@@ -566,6 +595,17 @@ function kf_options_page(  ) {
 				$optionBoxBgColor = "#fff";				
 			endif;
 
+			if (isset($kfSettings['kf_field_box_default_width'])) :
+				$optionBoxDefaultWidth = $kfSettings['kf_field_box_default_width'];
+				if ($optionBoxDefaultWidth) : 
+					$optionBoxtWidth = $optionBoxDefaultWidth;
+				else : 
+					$optionBoxtWidth = "auto";				
+				endif; 
+			else : 
+				$optionBoxtWidth = "auto";				
+			endif;
+
 			if (isset($kfSettings['kf_field_box_default_border_top_color'])) :
 				$optionBoxDefaultBorderTopColor = $kfSettings['kf_field_box_default_border_top_color'];
 				if ($optionBoxDefaultBorderTopColor) : 
@@ -789,6 +829,7 @@ function kf_options_page(  ) {
 				border-top-right-radius: ' . $optionBoxRadiusTopRight . ';
 				border-bottom-right-radius: ' . $optionBoxRadiusBottomRight . ';
 				border-bottom-left-radius: ' . $optionBoxRadiusBottomLeft . ';
+				width: ' . $optionBoxtWidth . ';
 			}
 			.keyfigure_bloc_figure {
 				' . $textPositionCSS_Figure . '
