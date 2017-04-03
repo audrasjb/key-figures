@@ -151,6 +151,15 @@ function kf_settings_init(  ) {
 		'kf_key_figures_page_section_box' 
 	);
 
+	// Default floating behaviour
+	add_settings_field( 
+		'kf_field_box_default_align', 
+		__( 'Box alignment', 'key-figures' ), 
+		'kf_field_box_default_align_render', 
+		'key_figures_page', 
+		'kf_key_figures_page_section_box' 
+	);
+
 	// Default border settings
 	add_settings_field( 
 		'kf_field_box_default_border', 
@@ -313,6 +322,24 @@ function kf_field_box_default_width_render(  ) {
 		<option value="100%" <?php selected( $optionBoxDefaultWidth, '100%' ); ?>><?php echo __('100% of parent container', 'key-figures'); ?></option>
 	</select>
 	<p><span class="description"><?php echo __('Note: percents are relative to the container width. Please note that if you select <em>100% of parent container</em>, you should set paddings to <code>0</code> to prevent container overstepping.', 'key-figures'); ?></span></p>
+<?php
+}
+
+function kf_field_box_default_align_render(  ) { 
+	$options = get_option( 'kf_settings' );
+	if (isset($options['kf_field_box_default_align'])) {
+		$optionBoxDefaultAlign = $options['kf_field_box_default_align'];
+	} else {
+		$optionBoxDefaultAlign = 'left';		
+	}
+	?>
+	<select name='kf_settings[kf_field_box_default_align]'>
+		<option value="left" <?php selected( $optionBoxDefaultAlign, 'left' ); ?>><?php echo __('Left and cleared', 'key-figures'); ?></option>
+		<option value="right" <?php selected( $optionBoxDefaultAlign, 'right' ); ?>><?php echo __('Right and cleared', 'key-figures'); ?></option>
+		<option value="center" <?php selected( $optionBoxDefaultAlign, 'center' ); ?>><?php echo __('Center', 'key-figures'); ?></option>
+		<option value="floatleft" <?php selected( $optionBoxDefaultAlign, 'floatleft' ); ?>><?php echo __('Floating on the left', 'key-figures'); ?></option>
+		<option value="floatright" <?php selected( $optionBoxDefaultAlign, 'floatright' ); ?>><?php echo __('Floating on the right', 'key-figures'); ?></option>
+	</select>
 <?php
 }
 
@@ -617,6 +644,17 @@ function kf_options_page(  ) {
 				$optionBoxtWidth = "auto";				
 			endif;
 
+			if (isset($kfSettings['kf_field_box_default_align'])) :
+				$optionBoxDefaultAlign = $kfSettings['kf_field_box_default_align'];
+				if ($optionBoxDefaultAlign) : 
+					$optionBoxAlign = $optionBoxDefaultAlign;
+				else : 
+					$optionBoxAlign = "left";				
+				endif; 
+			else : 
+				$optionBoxAlign = "left";				
+			endif;
+
 			if (isset($kfSettings['kf_field_box_default_border_top_color'])) :
 				$optionBoxDefaultBorderTopColor = $kfSettings['kf_field_box_default_border_top_color'];
 				if ($optionBoxDefaultBorderTopColor) : 
@@ -793,30 +831,44 @@ function kf_options_page(  ) {
 				$optionBoxPaddingLeft = "10px";				
 			endif;
 
+			// Text Position and corresponding CSS/JS
 			if ($optionTextPosition == 'top') :
-				$textPositionCSS_Block = 'display:inline-block; text-align:center;';
-				$textPositionCSS_Figure = 'display:block;';
-				$textPositionCSS_Text = 'display:block;';
+				$textPositionCSS_Block = 'display:inline-block; text-align:center';
+				$textPositionCSS_Figure = 'display:block';
+				$textPositionCSS_Text = 'display:block';
 				$textPositionJS_Order = 'var KFelements = jQuery(this).parent(); var KFordered = KFelements.children("span"); KFelements.append(KFordered.get().reverse());';
 				$textPositionJS_Size = '';
 			elseif ($optionTextPosition == 'right') :
-				$textPositionCSS_Block = 'display:table;';
-				$textPositionCSS_Figure = 'display:table-cell;';
-				$textPositionCSS_Text = 'display:table-cell; vertical-align: middle; padding-left: 1em;';
+				$textPositionCSS_Block = 'display:table';
+				$textPositionCSS_Figure = 'display:table-cell';
+				$textPositionCSS_Text = 'display:table-cell; vertical-align: middle; padding-left: 1em';
 				$textPositionJS_Order = '';
 				$textPositionJS_Size = 'jQuery(this).css("width", jQuery(this).width());';
 			elseif ($optionTextPosition == 'bottom') :
-				$textPositionCSS_Block = 'display:inline-block; text-align:center;';
-				$textPositionCSS_Figure = 'display:block;';
-				$textPositionCSS_Text = 'display:block;';
+				$textPositionCSS_Block = 'display:inline-block; text-align:center';
+				$textPositionCSS_Figure = 'display:block';
+				$textPositionCSS_Text = 'display:block';
 				$textPositionJS_Order = '';
 				$textPositionJS_Size = '';
 			elseif ($optionTextPosition == 'left') :
-				$textPositionCSS_Block = 'display:table;';
-				$textPositionCSS_Figure = 'display:table-cell;';
-				$textPositionCSS_Text = 'display:table-cell; vertical-align: middle; padding-right: 1em;';
+				$textPositionCSS_Block = 'display:table';
+				$textPositionCSS_Figure = 'display:table-cell';
+				$textPositionCSS_Text = 'display:table-cell; vertical-align: middle; padding-right: 1em';
 				$textPositionJS_Order = 'var KFelements = jQuery(this).parent(); var KFordered = KFelements.children("span"); KFelements.append(KFordered.get().reverse());';
 				$textPositionJS_Size = 'jQuery(this).css("width", jQuery(this).width());';
+			endif;
+			
+			// Alignement and corresponding CSS
+			if ($optionBoxAlign == 'left') :
+				$alignCSS = '';
+			elseif ($optionBoxAlign == 'right') : 
+				$alignCSS = 'position:absolute;right:0';			
+			elseif ($optionBoxAlign == 'center') :
+				$alignCSS = 'display:block; margin: 0 auto';
+			elseif ($optionBoxAlign == 'floatleft') : 
+				$alignCSS = 'margin-right:2em;float:left';
+			elseif ($optionBoxAlign == 'floatright') : 
+				$alignCSS = 'margin-left:2em;float:right';
 			endif;
 			
 			echo '<style>';
@@ -825,12 +877,13 @@ function kf_options_page(  ) {
 			* Key Figures stylesheet
 			*/
 			.keyfigure_bloc {
-				' . $textPositionCSS_Block . '
+				' . $textPositionCSS_Block . ';
 				padding-top: ' . $optionBoxPaddingTop . ';
 				padding-right: ' . $optionBoxPaddingRight . ';
 				padding-bottom: ' . $optionBoxPaddingBottom . ';
 				padding-left: ' . $optionBoxPaddingLeft . ';
 				margin: 0;
+				' . $alignCSS . ';
 				background-color: ' . $optionBoxBgColor . ';
 				border-top: ' . $optionBoxBorderTopThickness . ' solid ' . $optionBoxBorderTopColor . ';
 				border-right: ' . $optionBoxBorderRightThickness . ' solid ' . $optionBoxBorderRightColor . ';
@@ -843,13 +896,13 @@ function kf_options_page(  ) {
 				width: ' . $optionBoxtWidth . ';
 			}
 			.keyfigure_bloc_figure {
-				' . $textPositionCSS_Figure . '
+				' . $textPositionCSS_Figure . ';
 				vertical-align: middle;
 				font-size: ' . $optionFigureSize . 'px;
 				color: ' . $optionFigureColor . ';
 			}
 			.keyfigure_bloc_text {
-				' . $textPositionCSS_Text . '
+				' . $textPositionCSS_Text . ';
 				font-size: ' . $optionTextSize . 'px;
 				color: ' . $optionTextColor . ';
 			}
@@ -927,6 +980,7 @@ function kf_options_page(  ) {
 ?>
 		<h2><?php echo __('Preview', 'key-figures'); ?></h2>
 		<div style="background:#fff;padding:30px;">
+			<p>Sed aliquet eleifend ipsum quis bibendum. Proin faucibus, dui id lobortis ullamcorper, est ligula vehicula lectus, vel fringilla elit nibh eget orci. Vestibulum eu odio eu elit aliquet mollis. Integer nec ligula et metus cursus elementum. Mauris posuere vestibulum placerat. Nunc ac elit mattis, facilisis ex et, rhoncus nisi.</p>
 			<p>Nullam at diam laoreet, porttitor orci at, hendrerit justo. Morbi imperdiet ex eget vehicula fringilla. Phasellus ac ullamcorper risus. Quisque sed massa ante. Vivamus condimentum quam sed tempus fermentum. Sed in porttitor orci, id semper ex. Curabitur ultrices placerat metus id feugiat. Integer scelerisque quam a mauris pretium, nec pellentesque velit malesuada. Integer in interdum arcu. </p>
 			<p>
 				<span style="line-height:1.5em;" class="keyfigure_bloc" data-animation="none" data-figure="22">
@@ -935,6 +989,7 @@ function kf_options_page(  ) {
 				</span>
 			</p>
 			<p>Sed aliquet eleifend ipsum quis bibendum. Proin faucibus, dui id lobortis ullamcorper, est ligula vehicula lectus, vel fringilla elit nibh eget orci. Vestibulum eu odio eu elit aliquet mollis. Integer nec ligula et metus cursus elementum. Mauris posuere vestibulum placerat. Nunc ac elit mattis, facilisis ex et, rhoncus nisi.</p>
+			<p>Nullam at diam laoreet, porttitor orci at, hendrerit justo. Morbi imperdiet ex eget vehicula fringilla. Phasellus ac ullamcorper risus. Quisque sed massa ante. Vivamus condimentum quam sed tempus fermentum. Sed in porttitor orci, id semper ex. Curabitur ultrices placerat metus id feugiat. Integer scelerisque quam a mauris pretium, nec pellentesque velit malesuada. Integer in interdum arcu.</p>
 		</div>
 	</div>
 	<?php

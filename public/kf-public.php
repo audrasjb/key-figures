@@ -115,6 +115,17 @@
 				$optionBoxtWidth = "auto";				
 			endif;
 
+			if (isset($kfSettings['kf_field_box_default_align'])) :
+				$optionBoxDefaultAlign = $kfSettings['kf_field_box_default_align'];
+				if ($optionBoxDefaultAlign) : 
+					$optionBoxAlign = $optionBoxDefaultAlign;
+				else : 
+					$optionBoxAlign = "left";				
+				endif; 
+			else : 
+				$optionBoxAlign = "left";				
+			endif;
+
 			if (isset($kfSettings['kf_field_box_default_border_top_color'])) :
 				$optionBoxDefaultBorderTopColor = $kfSettings['kf_field_box_default_border_top_color'];
 				if ($optionBoxDefaultBorderTopColor) : 
@@ -291,30 +302,44 @@
 				$optionBoxPaddingLeft = "10px";				
 			endif;
 
+			// Text Position and corresponding CSS/JS
 			if ($optionTextPosition == 'top') :
-				$textPositionCSS_Block = 'display:inline-block; text-align:center;';
-				$textPositionCSS_Figure = 'display:block;';
-				$textPositionCSS_Text = 'display:block;';
+				$textPositionCSS_Block = 'display:inline-block; text-align:center';
+				$textPositionCSS_Figure = 'display:block';
+				$textPositionCSS_Text = 'display:block';
 				$textPositionJS_Order = 'var KFelements = jQuery(this).parent(); var KFordered = KFelements.children("span"); KFelements.append(KFordered.get().reverse());';
 				$textPositionJS_Size = '';
 			elseif ($optionTextPosition == 'right') :
-				$textPositionCSS_Block = 'display:table;';
-				$textPositionCSS_Figure = 'display:table-cell;';
-				$textPositionCSS_Text = 'display:table-cell; vertical-align: middle; padding-left: 1em;';
+				$textPositionCSS_Block = 'display:table';
+				$textPositionCSS_Figure = 'display:table-cell';
+				$textPositionCSS_Text = 'display:table-cell; vertical-align: middle; padding-left: 1em';
 				$textPositionJS_Order = '';
 				$textPositionJS_Size = 'jQuery(this).css("width", jQuery(this).width());';
 			elseif ($optionTextPosition == 'bottom') :
-				$textPositionCSS_Block = 'display:inline-block; text-align:center;';
-				$textPositionCSS_Figure = 'display:block;';
-				$textPositionCSS_Text = 'display:block;';
+				$textPositionCSS_Block = 'display:inline-block; text-align:center';
+				$textPositionCSS_Figure = 'display:block';
+				$textPositionCSS_Text = 'display:block';
 				$textPositionJS_Order = '';
 				$textPositionJS_Size = '';
 			elseif ($optionTextPosition == 'left') :
-				$textPositionCSS_Block = 'display:table;';
-				$textPositionCSS_Figure = 'display:table-cell;';
-				$textPositionCSS_Text = 'display:table-cell; vertical-align: middle; padding-right: 1em;';
+				$textPositionCSS_Block = 'display:table';
+				$textPositionCSS_Figure = 'display:table-cell';
+				$textPositionCSS_Text = 'display:table-cell; vertical-align: middle; padding-right: 1em';
 				$textPositionJS_Order = 'var KFelements = jQuery(this).parent(); var KFordered = KFelements.children("span"); KFelements.append(KFordered.get().reverse());';
 				$textPositionJS_Size = 'jQuery(this).css("width", jQuery(this).width());';
+			endif;
+			
+			// Alignement and corresponding CSS
+			if ($optionBoxAlign == 'left') :
+				$alignCSS = '';
+			elseif ($optionBoxAlign == 'right') : 
+				$alignCSS = 'position:absolute;right:0';			
+			elseif ($optionBoxAlign == 'center') :
+				$alignCSS = 'display:block; margin: 0 auto';
+			elseif ($optionBoxAlign == 'floatleft') : 
+				$alignCSS = 'margin-right:2em;float:left';
+			elseif ($optionBoxAlign == 'floatright') : 
+				$alignCSS = 'margin-left:2em;float:right';
 			endif;
 			
 			echo '<style>';
@@ -323,12 +348,13 @@
 			* Key Figures stylesheet
 			*/
 			.keyfigure_bloc {
-				' . $textPositionCSS_Block . '
+				' . $textPositionCSS_Block . ';
 				padding-top: ' . $optionBoxPaddingTop . ';
 				padding-right: ' . $optionBoxPaddingRight . ';
 				padding-bottom: ' . $optionBoxPaddingBottom . ';
 				padding-left: ' . $optionBoxPaddingLeft . ';
 				margin: 0;
+				' . $alignCSS . ';
 				background-color: ' . $optionBoxBgColor . ';
 				border-top: ' . $optionBoxBorderTopThickness . ' solid ' . $optionBoxBorderTopColor . ';
 				border-right: ' . $optionBoxBorderRightThickness . ' solid ' . $optionBoxBorderRightColor . ';
@@ -341,13 +367,13 @@
 				width: ' . $optionBoxtWidth . ';
 			}
 			.keyfigure_bloc_figure {
-				' . $textPositionCSS_Figure . '
+				' . $textPositionCSS_Figure . ';
 				vertical-align: middle;
 				font-size: ' . $optionFigureSize . 'px;
 				color: ' . $optionFigureColor . ';
 			}
 			.keyfigure_bloc_text {
-				' . $textPositionCSS_Text . '
+				' . $textPositionCSS_Text . ';
 				font-size: ' . $optionTextSize . 'px;
 				color: ' . $optionTextColor . ';
 			}
