@@ -142,11 +142,20 @@ function kf_settings_init(  ) {
 		'kf_key_figures_page_section_box' 
 	);
 
-	// Default border color
+	// Default border settings
 	add_settings_field( 
 		'kf_field_box_default_border_color', 
 		__( 'Border color', 'key-figures' ), 
 		'kf_field_box_default_border_color_render', 
+		'key_figures_page', 
+		'kf_key_figures_page_section_box' 
+	);
+
+	// Default border radius settings
+	add_settings_field( 
+		'kf_field_box_default_border_radius', 
+		__( 'Border radius', 'key-figures' ), 
+		'kf_field_box_default_border_radius_render', 
 		'key_figures_page', 
 		'kf_key_figures_page_section_box' 
 	);
@@ -347,6 +356,49 @@ function kf_field_box_default_border_color_render(  ) {
 	<span class="description" style="display:inline-block;padding-left: 2em;position: relative;top: -8px;"><?php echo __('Thickness:', 'key-figures'); ?> </span>
 	<input type="number" style="position:relative;top:-8px;" class="small-text" name="kf_settings[kf_field_box_default_border_left_thickness]" value="<?php echo $optionBoxDefaultBorderLeftThickness; ?>" />
 	<span class="description" style="position:relative;top:-8px;"><?php echo __('Pixels (px)', 'key-figures'); ?></span>
+	<?php
+}
+
+function kf_field_box_default_border_radius_render(  ) {
+	$options = get_option( 'kf_settings' );
+	if (isset($options['kf_field_box_default_radius_topleft'])) {
+		$optionBoxDefaultRadiusTopLeft = $options['kf_field_box_default_radius_topleft'];
+	} else {
+		$optionBoxDefaultRadiusTopLeft = '';		
+	}
+	if (isset($options['kf_field_box_default_radius_topright'])) {
+		$optionBoxDefaultRadiusTopRight = $options['kf_field_box_default_radius_topright'];
+	} else {
+		$optionBoxDefaultRadiusTopRight = '';		
+	}
+	if (isset($options['kf_field_box_default_radius_bottomright'])) {
+		$optionBoxDefaultRadiusBottomRight = $options['kf_field_box_default_radius_bottomright'];
+	} else {
+		$optionBoxDefaultRadiusBottomRight = '';		
+	}
+	if (isset($options['kf_field_box_default_radius_bottomleft'])) {
+		$optionBoxDefaultRadiusBottomLeft = $options['kf_field_box_default_radius_bottomleft'];
+	} else {
+		$optionBoxDefaultRadiusBottomLeft = '';		
+	}
+	?>
+	<span class="description" style="display:inline-block;width: 100px;"><?php echo __('Top left:', 'key-figures'); ?> </span>
+	<input type="number" class="small-text" name="kf_settings[kf_field_box_default_radius_topleft]" value="<?php echo $optionBoxDefaultRadiusTopLeft; ?>" />
+	<span class="description"><?php echo __('Pixels (px)', 'key-figures'); ?></span><br />
+
+	<span class="description" style="display:inline-block;width: 100px;"><?php echo __('Top Right:', 'key-figures'); ?> </span>
+	<input type="number" class="small-text" name="kf_settings[kf_field_box_default_radius_topright]" value="<?php echo $optionBoxDefaultRadiusTopRight; ?>" />
+	<span class="description"><?php echo __('Pixels (px)', 'key-figures'); ?></span><br />
+
+	<span class="description" style="display:inline-block;width: 100px;"><?php echo __('Bottom right:', 'key-figures'); ?> </span>
+	<input type="number" class="small-text" name="kf_settings[kf_field_box_default_radius_bottomright]" value="<?php echo $optionBoxDefaultRadiusBottomRight; ?>" />
+	<span class="description"><?php echo __('Pixels (px)', 'key-figures'); ?></span><br />
+
+	<span class="description" style="display:inline-block;width: 100px;"><?php echo __('Bottom left:', 'key-figures'); ?> </span>
+	<input type="number" class="small-text" name="kf_settings[kf_field_box_default_radius_bottomleft]" value="<?php echo $optionBoxDefaultRadiusBottomLeft; ?>" />
+	<span class="description"><?php echo __('Pixels (px)', 'key-figures'); ?></span><br />
+	<br />
+	<span class="description"><?php echo __('Note: the border-radius property works even better if there is no border but a background color is needed to see it in action. If you want a perfect circle, you need to set equal width and height sizes (select "fit width to content" and "fit width to height" options below for better rendering).', 'key-figures'); ?></span>
 	<?php
 }
 
@@ -602,6 +654,50 @@ function kf_options_page(  ) {
 				$optionBoxBorderLeftThickness = "0px";				
 			endif;
 
+			if (isset($kfSettings['kf_field_box_default_radius_topleft'])) :
+				$optionBoxDefaultRadiusTopLeft = $kfSettings['kf_field_box_default_radius_topleft'];
+				if ($optionBoxDefaultRadiusTopLeft) : 
+					$optionBoxRadiusTopLeft = $optionBoxDefaultRadiusTopLeft . 'px';
+				else : 
+					$optionBoxRadiusTopLeft = "0";				
+				endif; 
+			else : 
+				$optionBoxRadiusTopLeft = "0";				
+			endif;
+			
+			if (isset($kfSettings['kf_field_box_default_radius_topright'])) :
+				$optionBoxDefaultRadiusTopRight = $kfSettings['kf_field_box_default_radius_topright'];
+				if ($optionBoxDefaultRadiusTopRight) : 
+					$optionBoxRadiusTopRight = $optionBoxDefaultRadiusTopRight . 'px';
+				else : 
+					$optionBoxRadiusTopRight = "0";				
+				endif; 
+			else : 
+				$optionBoxRadiusTopRight = "0";				
+			endif;
+			
+			if (isset($kfSettings['kf_field_box_default_radius_bottomright'])) :
+				$optionBoxDefaultRadiusBottomRight = $kfSettings['kf_field_box_default_radius_bottomright'];
+				if ($optionBoxDefaultRadiusBottomRight) : 
+					$optionBoxRadiusBottomRight = $optionBoxDefaultRadiusBottomRight . 'px';
+				else : 
+					$optionBoxRadiusBottomRight = "0";				
+				endif; 
+			else : 
+				$optionBoxRadiusBottomRight = "0";				
+			endif;
+			
+			if (isset($kfSettings['kf_field_box_default_radius_bottomleft'])) :
+				$optionBoxDefaultRadiusBottomLeft = $kfSettings['kf_field_box_default_radius_bottomleft'];
+				if ($optionBoxDefaultRadiusBottomLeft) : 
+					$optionBoxRadiusBottomLeft = $optionBoxDefaultRadiusBottomLeft . 'px';
+				else : 
+					$optionBoxRadiusBottomLeft = "0";				
+				endif; 
+			else : 
+				$optionBoxRadiusBottomLeft = "0";				
+			endif;
+
 			if (isset($kfSettings['kf_field_box_default_padding_top'])) :
 				$optionBoxDefaultPaddingTop = $kfSettings['kf_field_box_default_padding_top'];
 				if ($optionBoxDefaultPaddingTop) : 
@@ -689,6 +785,10 @@ function kf_options_page(  ) {
 				border-right: ' . $optionBoxBorderRightThickness . ' solid ' . $optionBoxBorderRightColor . ';
 				border-bottom: ' . $optionBoxBorderBottomThickness . ' solid ' . $optionBoxBorderBottomColor . ';
 				border-left: ' . $optionBoxBorderLeftThickness . ' solid ' . $optionBoxBorderLeftColor . ';
+				border-top-left-radius: ' . $optionBoxRadiusTopLeft . ';
+				border-top-right-radius: ' . $optionBoxRadiusTopRight . ';
+				border-bottom-right-radius: ' . $optionBoxRadiusBottomRight . ';
+				border-bottom-left-radius: ' . $optionBoxRadiusBottomLeft . ';
 			}
 			.keyfigure_bloc_figure {
 				' . $textPositionCSS_Figure . '

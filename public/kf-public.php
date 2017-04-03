@@ -192,6 +192,50 @@
 				$optionBoxBorderLeftThickness = "0px";				
 			endif;
 
+			if (isset($kfSettings['kf_field_box_default_radius_topleft'])) :
+				$optionBoxDefaultRadiusTopLeft = $kfSettings['kf_field_box_default_radius_topleft'];
+				if ($optionBoxDefaultRadiusTopLeft) : 
+					$optionBoxRadiusTopLeft = $optionBoxDefaultRadiusTopLeft . 'px';
+				else : 
+					$optionBoxRadiusTopLeft = "0";				
+				endif; 
+			else : 
+				$optionBoxRadiusTopLeft = "0";				
+			endif;
+			
+			if (isset($kfSettings['kf_field_box_default_radius_topright'])) :
+				$optionBoxDefaultRadiusTopRight = $kfSettings['kf_field_box_default_radius_topright'];
+				if ($optionBoxDefaultRadiusTopRight) : 
+					$optionBoxRadiusTopRight = $optionBoxDefaultRadiusTopRight . 'px';
+				else : 
+					$optionBoxRadiusTopRight = "0";				
+				endif; 
+			else : 
+				$optionBoxRadiusTopRight = "0";				
+			endif;
+			
+			if (isset($kfSettings['kf_field_box_default_radius_bottomright'])) :
+				$optionBoxDefaultRadiusBottomRight = $kfSettings['kf_field_box_default_radius_bottomright'];
+				if ($optionBoxDefaultRadiusBottomRight) : 
+					$optionBoxRadiusBottomRight = $optionBoxDefaultRadiusBottomRight . 'px';
+				else : 
+					$optionBoxRadiusBottomRight = "0";				
+				endif; 
+			else : 
+				$optionBoxRadiusBottomRight = "0";				
+			endif;
+			
+			if (isset($kfSettings['kf_field_box_default_radius_bottomleft'])) :
+				$optionBoxDefaultRadiusBottomLeft = $kfSettings['kf_field_box_default_radius_bottomleft'];
+				if ($optionBoxDefaultRadiusBottomLeft) : 
+					$optionBoxRadiusBottomLeft = $optionBoxDefaultRadiusBottomLeft . 'px';
+				else : 
+					$optionBoxRadiusBottomLeft = "0";				
+				endif; 
+			else : 
+				$optionBoxRadiusBottomLeft = "0";				
+			endif;
+
 			if (isset($kfSettings['kf_field_box_default_padding_top'])) :
 				$optionBoxDefaultPaddingTop = $kfSettings['kf_field_box_default_padding_top'];
 				if ($optionBoxDefaultPaddingTop) : 
@@ -279,6 +323,10 @@
 				border-right: ' . $optionBoxBorderRightThickness . ' solid ' . $optionBoxBorderRightColor . ';
 				border-bottom: ' . $optionBoxBorderBottomThickness . ' solid ' . $optionBoxBorderBottomColor . ';
 				border-left: ' . $optionBoxBorderLeftThickness . ' solid ' . $optionBoxBorderLeftColor . ';
+				border-top-left-radius: ' . $optionBoxRadiusTopLeft . ';
+				border-top-right-radius: ' . $optionBoxRadiusTopRight . ';
+				border-bottom-right-radius: ' . $optionBoxRadiusBottomRight . ';
+				border-bottom-left-radius: ' . $optionBoxRadiusBottomLeft . ';
 			}
 			.keyfigure_bloc_figure {
 				' . $textPositionCSS_Figure . '
