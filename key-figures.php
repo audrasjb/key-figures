@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @link              https://jeanbaptisteaudras.com/portfolio/extension-wordpress-plan-de-site/
+ * @link              https://jeanbaptisteaudras.com/portfolio/extension-wordpress-chiffre-cles/
  * @since             1.0
  * @package           Key Figures
  *
  * @wordpress-plugin
  * Plugin Name:       Key Figures
- * Plugin URI:        https://jeanbaptisteaudras.com/portfolio/extension-wordpress-plan-de-site/
+ * Plugin URI:        https://jeanbaptisteaudras.com/portfolio/extension-wordpress-chiffre-cles/
  * Description:       Display key figures with custom styles and animations in WordPress visual editor.
  * Version:           1.0
  * Author:            Jean-Baptiste Audras, project manager @ Whodunit
