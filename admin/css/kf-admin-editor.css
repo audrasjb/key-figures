@@ -7,15 +7,17 @@ body .keyfigure_bloc {
 	position: relative;
 }
 body .keyfigure_bloc::before {
+	content: "\f313";
+	display: inline-block;
+	-webkit-font-smoothing: antialiased;
+	font: normal 20px/1 'dashicons';
+	vertical-align: top;
 	display: block;
 	position: absolute;
 	top: 0;
 	padding: 2px 3px;
-	font-size: 10px;
-	background: #dedede;
-	color: #777;
-	content: attr(data-label);
-	
+	background: #eee;
+	color: #999;
 }
 
 body .keyfigure_bloc_figure {

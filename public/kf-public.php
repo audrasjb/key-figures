@@ -335,7 +335,7 @@
 			elseif ($optionBoxAlign == 'right') : 
 				$alignCSS = 'position:absolute;right:0';			
 			elseif ($optionBoxAlign == 'center') :
-				$alignCSS = 'display:block; margin: 0 auto';
+				$alignCSS = 'display:inline-block;margin-left:50%;transform:translateX(-50%);';
 			elseif ($optionBoxAlign == 'floatleft') : 
 				$alignCSS = 'margin-right:2em;float:left';
 			elseif ($optionBoxAlign == 'floatright') : 
@@ -386,14 +386,16 @@
 					jQuery(window).load(function() {
 						var keyFigures = new Array();
 						jQuery(".keyfigure_bloc_figure").each(function() {
-							if (jQuery(this).hasClass("keyfigure_bloc_type_number")) {
+							if (jQuery(this).parent(".keyfigure_bloc").hasClass("keyfigure_bloc_type_number")) {
 								' . $textPositionJS_Size . '
 								keyFigures.push(0);
 								' . $textPositionJS_Order . '
 								var counterFinalValue = jQuery(this).text();
 								jQuery(this).attr("data-value", counterFinalValue);
+								jQuery(this).css("width", jQuery(this).width()+"px");
 							}
 						});
+						
 						jQuery(window).scroll(function() {
 							var i = 0;
 							jQuery(".keyfigure_bloc_figure").each(function() {
