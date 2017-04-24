@@ -1,8 +1,8 @@
 === Key Figures ===
 Contributors: audrasjb,whodunitagency
 Tags: key, figures, figure, keyfigures, chiffres, chiffre-clé, chiffre, clé, key-figures, tinymce
-Requires at least: 4.5
-Tested up to: 4.7.3
+Requires at least: 4.0
+Tested up to: 4.7.4
 Stable tag: 1.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -11,7 +11,23 @@ Display key figures with custom styles and animations in visual editor.
 
 == Description ==
 
-**Credits** : 
+**Main features**
+
+This plugin is used to generate blocks of key figures in your content.
+Fully customizable, it allows many settings:
+*	dimensions of each element
+*	text sizes and alignment
+*	positioning
+*	animations (like counter or fade in)
+*	background and text colors
+*	borders
+*	margins and paddings
+
+It does *not* use any shortcode, so you do *not* need any technical skills to use it and it doesn’t broke your website if you decide to remove the plugin later.
+
+The plugin simply add a new button to your visual editor to create key figure boxes in your content.
+
+**Credits**
 
 *   [Jean-Baptiste Audras](http://jeanbaptisteaudras.com/ "Jean-Baptiste Audras"), project manager at [Whodunit](http://www.whodunit.fr/ "Whodunit WordPress Agency") and WordPress developer. @audrasjb on [Twitter](https://twitter.com/audrasjb "@audrasjb on Twitter") or [Github](https://github.com/audrasjb "@audrasjb on Github").
 
@@ -20,18 +36,19 @@ Add your own language pack on GlotPress or do pull requests on [Github](https://
 == Installation ==
 
 1. Install the plugin and activate.
-2. Go to Reading options to select the sitemap page.
-3. Go to Appearance &gt; Key figures to manage plugin’s settings.
+2. Go to Settings $gt; Key Figures to manage plugin settings.
+3. Insert key figure boxes in your content using the key figure button (see screenshots).
 
 == Frequently Asked Questions ==
 
-= Is there any questions? =
-
-Not yet :)
+No question for the moment.
 
 == Screenshots ==
 
-1. Screenshot 1.
+1. Example of key figure in action.
+2. Plugin settings.
+3. Another example of key figure box.
+3. And a last example… be creative and do your own now! :)
 
 == Changelog ==
 
