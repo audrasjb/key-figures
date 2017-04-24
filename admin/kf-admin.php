@@ -230,7 +230,7 @@ function kf_field_figure_default_animation_render(  ) {
 		<option value="counter" <?php selected( $optionFigureAnimationDefault, 'counter' ); ?>><?php echo __('Counter', 'key-figures'); ?></option>
 		<option value="fadein" <?php selected( $optionFigureAnimationDefault, 'fadein' ); ?>><?php echo __('Fade in', 'key-figures'); ?></option>
 	</select>
-	<?php /*<p class="description"><?php echo __('Note: custom position is not ok with all WordPress themes. It needs a fixed element to stick the progressbar on it. <br />You may need some custom CSS to put the progressbar on the right place as it uses absolute positionning.', 'key-figures'); ?></p> */ ?>
+	<span class="description"><?php echo __('Please note that counting animation only works with numbers. Use "." separator for floating numbers.', 'key-figures'); ?></span>
 <?php
 }
 
