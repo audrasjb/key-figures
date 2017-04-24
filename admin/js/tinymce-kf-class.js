@@ -22,13 +22,16 @@
 							type: 'textbox',
 							name: 'figure',
 							label: kfTranslations['kf_figure_label'],
-							tooltip: kfTranslations['kf_figure_help']
+							tooltip: kfTranslations['kf_figure_help'],
+							minWidth: 300
 						},{
 							type: 'textbox',
 							multiline: true,
 							name: 'text',
 							label: kfTranslations['kf_text_label'],
-							tooltip: kfTranslations['kf_text_help']
+							tooltip: kfTranslations['kf_text_help'],
+							minWidth: 300,
+							minHeight: 100
 						}],
 					onsubmit: function( e ) {
 						editor.insertContent( 
