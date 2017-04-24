@@ -14,7 +14,9 @@ Display key figures with custom styles and animations in visual editor.
 **Main features**
 
 This plugin is used to generate blocks of key figures in your content.
+
 Fully customizable, it allows many settings:
+
 *	dimensions of each element
 *	text sizes and alignment
 *	positioning
@@ -22,6 +24,8 @@ Fully customizable, it allows many settings:
 *	background and text colors
 *	borders
 *	margins and paddings
+
+And on the plugin settings page, you can preview the front-end rendering :)
 
 It does *not* use any shortcode, so you do *not* need any technical skills to use it and it doesn’t broke your website if you decide to remove the plugin later.
 
@@ -46,9 +50,11 @@ No question for the moment.
 == Screenshots ==
 
 1. Example of key figure in action.
-2. Plugin settings.
-3. Another example of key figure box.
-3. And a last example… be creative and do your own now! :)
+2. Plugin settings (first part).
+3. Plugin settings (second part).
+4. Plugin settings (third and last part: front-end preview).
+5. Plugin rendering in visual editor.
+6. And a last example… be creative and do your own now! :)
 
 == Changelog ==
 
