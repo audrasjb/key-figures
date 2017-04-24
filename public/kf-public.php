@@ -381,46 +381,48 @@
 			echo '</style>';
 			if (isset($kfSettings['kf_field_figure_default_animation']) && $kfSettings['kf_field_figure_default_animation'] != 'none') :
 				if ($optionFigureAnimation == "counter") :
-				echo '
-				<script>
-				jQuery(window).load(function() {
-					var keyFigures = new Array();
-					jQuery(".keyfigure_bloc_figure").each(function() {
-						' . $textPositionJS_Size . '
-						keyFigures.push(0);
-						' . $textPositionJS_Order . '
-						var counterFinalValue = jQuery(this).text();
-						jQuery(this).attr("data-value", counterFinalValue);
-					});
-					jQuery(window).scroll(function() {
-						var i = 0;
+					echo '
+					<script>
+					jQuery(window).load(function() {
+						var keyFigures = new Array();
 						jQuery(".keyfigure_bloc_figure").each(function() {
-							var oTop = jQuery(this).offset().top - window.innerHeight;
-							if (keyFigures[i] == 0 && jQuery(window).scrollTop() > oTop) {
-								var counter = jQuery(this);
-								countTo = counter.children(this).attr("data-value");
-								jQuery({
-									countNum: 0
-								}).animate({
-									countNum: parseFloat(counter.text())
-								}, {
-									duration: ' . $optionFigureAnimationDuration . ',
-									easing: "swing",
-									step: function() {
-										counter.text(Math.floor(this.countNum));
-									},
-									complete: function() {
-										counter.text(this.countNum);
-									}
-								});
-								keyFigures[i] = 1;
+							if (jQuery(this).hasClass("keyfigure_bloc_type_number")) {
+								' . $textPositionJS_Size . '
+								keyFigures.push(0);
+								' . $textPositionJS_Order . '
+								var counterFinalValue = jQuery(this).text();
+								jQuery(this).attr("data-value", counterFinalValue);
 							}
-							i++;
+						});
+						jQuery(window).scroll(function() {
+							var i = 0;
+							jQuery(".keyfigure_bloc_figure").each(function() {
+								var oTop = jQuery(this).offset().top - window.innerHeight;
+								if (keyFigures[i] == 0 && jQuery(window).scrollTop() > oTop) {
+									var counter = jQuery(this);
+									countTo = counter.children(this).attr("data-value");
+									jQuery({
+										countNum: 0
+									}).animate({
+										countNum: parseFloat(counter.text())
+									}, {
+										duration: ' . $optionFigureAnimationDuration . ',
+										easing: "swing",
+										step: function() {
+											counter.text(Math.floor(this.countNum));
+										},
+										complete: function() {
+											counter.text(this.countNum);
+										}
+									});
+									keyFigures[i] = 1;
+								}
+								i++;
+							});
 						});
 					});
-				});
-				</script>
-				';
+					</script>
+					';
 				elseif ($optionFigureAnimation == 'fadein') :
 				echo '
 				<script>

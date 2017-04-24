@@ -1063,10 +1063,15 @@ class TinyMCE_KF {
 		}
 		$translations = json_encode(
 			array( 
+				'kf_modal_title' 	=> __('Key figure', 'key-figures'),
 				'kf_add_button' 	=> __('Key figure', 'key-figures'),
 				'kf_delete_button' 	=> __('Delete figure', 'key-figures'),
+				'kf_type_label' 	=> __('Type', 'key-figures'),
+				'kf_type_help' 		=> __('Define your figure type (it’s allowed to use text instead of numbers, but let me know here please)', 'key-figures'),
+				'kf_type_number' 	=> __('Number', 'key-figures'),
+				'kf_type_text' 		=> __('Text', 'key-figures'),
 				'kf_figure_label' 	=> __('Figure', 'key-figures'),
-				'kf_figure_help' 	=> __('Enter number', 'key-figures'),
+				'kf_figure_help' 	=> __('For floating number, please only use dots, e.g: "3.14"', 'key-figures'),
 				'kf_text_label' 	=> __('Text', 'key-figures'),
 				'kf_text_help' 		=> __('Enter text', 'key-figures'),
 			)
